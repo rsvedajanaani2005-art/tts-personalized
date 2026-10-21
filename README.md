@@ -53,7 +53,7 @@ HiFi-GAN was used as the neural vocoder to convert the mel-spectrograms predicte
 | Training Epochs | 15 |
 | Batch Size | 4 |
 | Learning Rate | 0.00005 |
-| Optimizer | Ada, optimizer |
+| Optimizer | Adam optimizer |
 | Sampling Rate | 22,050 Hz |
 | Training Dataset | 500 utterances |
 | Checkpoint Selection | Train loss |
