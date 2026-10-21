@@ -40,16 +40,45 @@ Synthesized speech waveform
 
 **Tacotron 2** models the relationship between text and acoustic features. **HiFi-GAN** generates the time-domain audio waveform from the mel-spectrogram. The final quality depends on the text normalization, training data, model checkpoints, inference settings, and recording conditions.
 
-## Evaluation metrics
 
-The evaluation script in `src/evaluate_tts.py` compares generated WAV files with reference recordings and transcripts. It reports:
+## Experimental Settings
 
-- **WER (Word Error Rate):** word recognition error in the synthesized audio; lower is better.
-- **CER (Character Error Rate):** character recognition error; lower is better.
-- **Reference-audio WER baseline:** ASR error on the original recording, which helps contextualize generated-audio WER.
-- **Speaker embedding cosine similarity:** a rough measure of voice-identity similarity; higher is generally better.
+### HiFi-GAN Vocoder Configuration
 
-The script uses Whisper Small for automatic speech recognition and SpeechBrain ECAPA speaker embeddings. These are proxy metrics, not a substitute for listening tests or a formal perceptual evaluation. WER/CER do not directly measure naturalness, and speaker similarity has no universal pass threshold.
+HiFi-GAN was used as the neural vocoder to convert the mel-spectrograms predicted by Tacotron 2 into synthesized speech waveforms. The vocoder training configuration is summarized below.
+
+| Parameter | Value |
+|---|---|
+| Vocoder | HiFi-GAN |
+| Training Epochs | [Enter number of epochs] |
+| Batch Size | [Enter batch size] |
+| Learning Rate | [Enter learning rate] |
+| Maximum Gradient Norm | [Enter gradient clipping value] |
+| Optimizer | [Enter optimizer] |
+| Sampling Rate | 22,050 Hz |
+| Training Dataset | 500 utterances |
+| Checkpoint Selection | [Validation loss / other criterion] |
+
+### Dataset Split
+
+The dataset containing 500 recorded utterances was divided into training, validation, and test subsets.
+
+| Subset | Number of Utterances | Percentage |
+|---|---:|---:|
+| Training | [Enter count] | [Enter %] |
+| Validation | [Enter count] | [Enter %] |
+| Test | [Enter count] | [Enter %] |
+| **Total** | **500** | **100%** |
+
+The training subset was used to optimize the model parameters. The validation subset was used to monitor training and support model selection, while the test subset was reserved for final evaluation.
+
+### Training Details
+
+- **Input representation:** Mel-spectrograms generated from speech recordings.
+- **Vocoder objective:** Train HiFi-GAN to synthesize waveforms corresponding to the target mel-spectrograms.
+- **Gradient clipping:** [Describe whether gradient clipping was applied and specify the maximum norm.]
+- **Model selection:** [Describe how the final checkpoint was selected.]
+- **Reproducibility:** The same dataset split and evaluation procedure should be maintained across experiments for a fair comparison.
 
 ## Privacy warning
 
