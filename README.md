@@ -50,25 +50,23 @@ HiFi-GAN was used as the neural vocoder to convert the mel-spectrograms predicte
 | Parameter | Value |
 |---|---|
 | Vocoder | HiFi-GAN |
-| Training Epochs | [Enter number of epochs] |
-| Batch Size | [Enter batch size] |
-| Learning Rate | [Enter learning rate] |
-| Maximum Gradient Norm | [Enter gradient clipping value] |
-| Optimizer | [Enter optimizer] |
+| Training Epochs | 15 |
+| Batch Size | 4 |
+| Learning Rate | 0.00005 |
+| Optimizer | Ada, optimizer |
 | Sampling Rate | 22,050 Hz |
 | Training Dataset | 500 utterances |
-| Checkpoint Selection | [Validation loss / other criterion] |
+| Checkpoint Selection | Train loss |
 
 ### Dataset Split
 
 The dataset containing 500 recorded utterances was divided into training, validation, and test subsets.
 
-| Subset | Number of Utterances | Percentage |
-|---|---:|---:|
-| Training | [Enter count] | [Enter %] |
-| Validation | [Enter count] | [Enter %] |
-| Test | [Enter count] | [Enter %] |
-| **Total** | **500** | **100%** |
+| Subset | Number of Utterances | 
+|---|---:|
+| Training | 450 | 
+| Validation | 50 | 
+| **Total** | **500** | 
 
 The training subset was used to optimize the model parameters. The validation subset was used to monitor training and support model selection, while the test subset was reserved for final evaluation.
 
@@ -76,8 +74,6 @@ The training subset was used to optimize the model parameters. The validation su
 
 - **Input representation:** Mel-spectrograms generated from speech recordings.
 - **Vocoder objective:** Train HiFi-GAN to synthesize waveforms corresponding to the target mel-spectrograms.
-- **Gradient clipping:** [Describe whether gradient clipping was applied and specify the maximum norm.]
-- **Model selection:** [Describe how the final checkpoint was selected.]
 - **Reproducibility:** The same dataset split and evaluation procedure should be maintained across experiments for a fair comparison.
 
 ## Privacy warning
